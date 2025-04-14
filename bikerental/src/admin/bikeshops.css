@@ -1,0 +1,39 @@
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+  }
+  
+  .shops-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .shops-table th, .shops-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .shops-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .shops-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .shops-table tr:hover {
+    background-color: #f1f1f1;
+  }
