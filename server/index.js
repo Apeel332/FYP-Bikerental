@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const path = require("path");   
+require('dotenv').config();
 
 const registerModel = require('./models/register')
 const shopregisterModel = require('./models/shopregister')
@@ -61,13 +62,16 @@ app.get('/admin', verifyUser, (req, res) => {
 
 
 app.post("/login", (req, res) => {
+    console.log("Login route accessed");
    const{email, password} = req.body;
     registerModel.findOne({email: email})
     .then(user => {
        
         if(user) {
             bcrypt.compare(password, user.password, (err, response) =>{
+                console.log("Password comparison result:", response);
                 if(response){
+                    console.log("Creating token for user ID:", user._id);
                     const token = jwt.sign(
                       { id: user._id, name: user.name, email: user.email, role: user.role },
                       "jwt-secret-key",
@@ -160,7 +164,8 @@ app.post("/shoplogin", (req, res) => {
          if(manager) {
              bcrypt.compare(password, manager.password, (err, response) =>{
                  if(response){
-                     const token = jwt.sign({email: manager.email, role: manager.role},
+                    console.log("Creating token for user ID:", manager._id);
+                     const token = jwt.sign({id: manager._id,email: manager.email, role: manager.role},
                          "jwt-secret-key", {expiresIn: '1d'})
                          res.cookie('token', token)
                          return res.json({Status: "Success", role: manager.role})
@@ -171,7 +176,7 @@ app.post("/shoplogin", (req, res) => {
              })
          } else {
              res.json("No record existed")
- 
+            
          }
          
      })

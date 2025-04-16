@@ -56,7 +56,7 @@ function ManagerSidebar({ openSidebarToggle, OpenSidebar }) {
           </a>
         </li>
         <li className="sidebar-list-item">
-          <a href="/booking">
+          <a href="/bookingreq">
             <BsExclamationTriangle className="icon" /> Bike Booking 
           </a>
         </li>

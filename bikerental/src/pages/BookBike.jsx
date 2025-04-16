@@ -47,15 +47,17 @@ function BookBike() {
   // Handle form submission
   const handleBooking = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await axios.post('http://localhost:3001/bookings', {
         contact: formData.contact,
         bookingDate: formData.bookingDate,
         package: formData.package,
-        bikeId: id  // use the ID from the URL
+        bikeId: id,  // The bike ID from the URL
+        bikeName: bike.BikeName,  // Including the bike name
+        ShopId: bike.ShopId  // Including the shop ID
       });
-  
+
       if (response.status === 201) {
         alert("Booking successful!");
         console.log("Booking saved:", response.data);
@@ -68,7 +70,6 @@ function BookBike() {
       console.error("Error during booking:", error.response?.data || error.message);
     }
   };
-  
 
   // Show loading message if bike details haven't been fetched yet
   if (!bike) return <p className="text-center mt-5 fs-5 fw-light">Loading bike details...</p>;

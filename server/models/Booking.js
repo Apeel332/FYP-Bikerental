@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const bookingSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
     required: true
   },
   name: String,
@@ -13,7 +12,16 @@ const bookingSchema = new mongoose.Schema({
   package: String,
   bikeId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Bike',
+    ref: 'Bike', // Ensure this matches the actual model name
+    required: true
+  },
+  bikeName: { 
+    type: String,
+    required: true
+  },
+  ShopId: {  // Add shopId field to reference the shop
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'shopregister',  // Replace 'Shop' with the actual model name for shops
     required: true
   }
 }, { timestamps: true });
