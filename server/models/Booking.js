@@ -12,7 +12,7 @@ const bookingSchema = new mongoose.Schema({
   package: String,
   bikeId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Bike', // Ensure this matches the actual model name
+    ref: 'bikes',// Ensure this matches the actual model name
     required: true
   },
   bikeName: { 

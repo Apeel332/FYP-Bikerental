@@ -65,15 +65,30 @@ function ViewShops() {
                       />
                       <div className="card-body">
                         <h5 className="card-title">{bike.BikeName}</h5>
-                        <p className="card-text">{bike.BikeDescription}</p>
-                        <p><strong>Bike No:</strong> {bike.BikeNo}</p>
                         <p><strong>Price:</strong> Rs. {bike.BikePrice}/day</p>
+                        <p><strong>Status:</strong> {bike.status}</p>
                       </div>
-                      <Link to={`/bookbike/${bike._id}`} className="btn btn-dark mt-4" style={{display: "block", borderRadius: "10px"}}
-                                          
-                                          >
-                                            Book Bike
-                                          </Link>
+                      {/* <Link
+                        to={`/bookbike/${bike._id}`}
+                        className="btn btn-dark mt-4"
+                        style={{ display: "block", borderRadius: "10px" }}
+                        disabled={bike.status !== "available"} // Disable button if status is not "available"
+                      >
+                        Book Bike
+                      </Link> */}
+                      <Link
+  to={bike.status === "available" ? `/bookbike/${bike._id}` : "#"}
+  className={`btn btn-dark mt-4 ${bike.status !== "available" ? "disabled" : ""}`}
+  style={{ 
+    display: "block", 
+    borderRadius: "10px", 
+    pointerEvents: bike.status !== "available" ? "none" : "auto", 
+    opacity: bike.status !== "available" ? 0.5 : 1 
+  }}
+>
+  Book Bike
+</Link>
+
                     </div>
                   </div>
                 ))

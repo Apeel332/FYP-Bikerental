@@ -21,6 +21,13 @@ const bikeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status: {
+    type: String,
+    enum: ['available', 'not available'],
+    default: 'available'
+  },
+
+  
   ShopId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "shopregister",

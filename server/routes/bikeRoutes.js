@@ -57,6 +57,29 @@ router.get("/shop/me", verifyShop, async (req, res) => {
   }
 });
 
+//bike status
+// PUT /bike/status/:id - update availability status
+router.put('/status/:id', async (req, res) => {
+  const bikeId = req.params.id;
+  const { status } = req.body;
+
+  try {
+    const bike = await Bike.findByIdAndUpdate(bikeId, { status }, { new: true });
+
+    if (!bike) {
+      return res.status(404).json({ error: 'Bike not found' });
+    }
+
+    res.status(200).json({ message: 'Bike status updated successfully', bike });
+  } catch (error) {
+    console.error('Error updating bike status:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
+
 // POST /CreateBike
 // Handles bike creation with image and shop ID
 // router.post("/CreateBike", verifyShop, upload.single("file"), async (req, res) => {
@@ -140,7 +163,20 @@ router.get("/bikes/:shopId", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch bikes" });
   }
 });
-
+    
+// Get a single bike by its ID
+router.get("/bike/:id", async (req, res) => {
+  try {
+    const bike = await Bike.findById(req.params.id);
+    if (!bike) {
+      return res.status(404).json({ error: "Bike not found" });
+    }
+    res.json(bike);
+  } catch (err) {
+    console.error("Error fetching bike:", err);
+    res.status(500).json({ error: "Failed to fetch bike" });
+  }
+});
 // PUT /bike/:bikeId
 // Updates bike data (including image if provided)
 router.put("/bike/:bikeId", upload.single("BikeImage"), async (req, res) => {

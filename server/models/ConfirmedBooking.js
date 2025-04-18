@@ -12,13 +12,17 @@ const confirmedBookingSchema = new mongoose.Schema({
   package: String,
   bikeId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Bike',
+    ref: 'bikes',
+
     required: true
   },
   bikeName: {
     type: String,
     required: true
   },
+
+  
+ 
   ShopId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Shop',

@@ -48,6 +48,23 @@ function ManageBikes() {
     }
   };
 
+  const toggleBikeStatus = async (bikeId, currentStatus) => {
+    const newStatus = currentStatus === 'available' ? 'not available' : 'available';
+    
+    try {
+      await axios.put(`http://localhost:3001/status/${bikeId}`, {
+        status: newStatus
+      }, { withCredentials: true });
+
+      // Update state after toggling the status
+      setBikes(prev =>
+        prev.map(b => (b._id === bikeId ? { ...b, status: newStatus } : b))
+      );
+    } catch (err) {
+      console.error('Failed to toggle bike status:', err);
+    }
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -69,6 +86,7 @@ function ManageBikes() {
                   <th>Bike Name</th>
                   <th>Description</th>
                   <th>Price/Per Day</th>
+                  <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -80,6 +98,8 @@ function ManageBikes() {
                       <td>{bike.BikeName}</td>
                       <td>{bike.BikeDescription}</td>
                       <td>Rs. {bike.BikePrice}</td>
+                      <td>{bike.status}</td>
+
                       <td>
                         <div className="d-flex flex-wrap gap-2">
                           <Link to={`/editbike/${bike._id}`} className="btn btn-sm btn-warning">
@@ -91,9 +111,13 @@ function ManageBikes() {
                           >
                             <i className="bi bi-trash"></i> Delete
                           </button>
-                          <button className="btn btn-sm btn-success">
-                            <i className="bi bi-check-circle"></i> Mark as Booked
-                          </button>
+                          <Link
+                            className="btn btn-sm btn-success"
+                            onClick={() => toggleBikeStatus(bike._id, bike.status)}
+                          >
+                            <i className="bi bi-check-circle"></i>
+                            {bike.status === 'not available' ? 'Booked' : 'Mark as Booked'}
+                          </Link>
                         </div>
                       </td>
                     </tr>
@@ -109,7 +133,7 @@ function ManageBikes() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default ManageBikes
+export default ManageBikes;
