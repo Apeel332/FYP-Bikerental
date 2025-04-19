@@ -41,13 +41,13 @@ function ManagerSidebar({ openSidebarToggle, OpenSidebar }) {
           </a>
         </li>
         <li className="sidebar-list-item">
-          <a href="/shopdetail">
+          <a href="/shopdetails ">
             <BsHousesFill className="icon" /> Shop Details
           </a>
         </li>
         <li className="sidebar-list-item">
-          <a href="/shopmanage">
-            <BsHouseAddFill className="icon" /> Shop Manage
+          <a href="/manageshop">
+            <BsHouseAddFill className="icon" /> Manage Shop
           </a>
         </li>
         <li className="sidebar-list-item">

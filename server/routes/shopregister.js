@@ -74,5 +74,28 @@ router.get("/:id", async (req, res) => {
   });
   
   
+  // PUT /shopregister/:id - Update shop info
+router.put("/:id", upload.single("image"), async (req, res) => {
+  try {
+    const shopId = req.params.id;
+    const updateFields = req.body;
+
+    if (req.file) {
+      updateFields.image = req.file.filename;
+    }
+
+    const updatedShop = await shopregisterModel.findByIdAndUpdate(shopId, updateFields, { new: true });
+
+    if (!updatedShop) {
+      return res.status(404).json({ message: "Shop not found" });
+    }
+
+    res.status(200).json(updatedShop);
+  } catch (error) {
+    console.error("Error updating shop:", error);
+    res.status(500).json({ message: "Error updating shop" });
+  }
+});
+
 
 module.exports = router;

@@ -26,6 +26,8 @@ import CreateBikes from './manager/CreateBikes';
 import BookBike from './pages/BookBike';
 import BookingRequest from './manager/BookingRequest';
 import EditBike from './manager/EditBike';
+import ManageShop from './manager/ManageShop';
+import ShopDetails from './manager/ShopDetails';
 
 
 // Layout with Navbar
@@ -83,6 +85,14 @@ function App() {
     {
       path: "/manager",
       element: <Manager />,
+    },
+    {
+      path: "/manageshop",
+      element: <ManageShop />,
+    },
+    {
+      path: "/shopdetails",
+      element: <ShopDetails />,
     },
     {
       path: "/bikeshops",

@@ -195,6 +195,52 @@ router.delete('/reject/:id', authenticateUser, async (req, res) => {
 
 
 
+// GET confirmed bookings for a shop with sorting
+router.get('/confirmed/:shopId', authenticateUser, async (req, res) => {
+  try {
+    const confirmed = await ConfirmedBooking.find({ ShopId: req.params.shopId })
+      .sort({ bookingDate: -1 }); // Sort by bookingDate descending
+    res.status(200).json(confirmed);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
+// GET /bookings/user - Get confirmed bookings of logged-in user
+// router.get('/user', authenticateUser, async (req, res) => {
+//   try {
+//     const userId = req.user.id;
+//     const bookings = await ConfirmedBooking.find({ userId }).populate('bikeId');
+//     res.status(200).json(bookings);
+//   } catch (error) {
+//     console.error("Error fetching user's confirmed bookings:", error);
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// });
+
+
+
+// GET /bookings/user - Get confirmed bookings of logged-in user
+router.get('/user', authenticateUser, async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    // Populate both bikeId and ShopId (where ShopId refers to the shop database)
+    const bookings = await ConfirmedBooking.find({ userId })
+      .populate('bikeId')
+      .populate('ShopId'); // This pulls shopname and other shop info
+
+    res.status(200).json(bookings);
+  } catch (error) {
+    console.error("Error fetching user's confirmed bookings:", error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 
 
 

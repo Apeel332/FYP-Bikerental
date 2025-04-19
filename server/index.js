@@ -130,19 +130,6 @@ app.use('/bookings', bookingRoutes);
   
 
 
-//shop registration
-// app.post('/shopregister', (req,res) => {
-//     const {shopname, address, contact, name, email, password} = req.body;
-//     bcrypt.hash(password, 10)
-//     .then(hash => {
-//         shopregisterModel.create({shopname, address, contact, name, email, password: hash})
-//         .then(user => res.json("Success"))
-//         .catch(err => res.json(err))
-
-//     }).catch(err => console.log(err.message))
-    
-
-// })
 
 
 
@@ -188,7 +175,7 @@ app.post("/shoplogin", (req, res) => {
 app.use('/api', shopRoutes); 
 
 
-
+ 
 
 app.listen(3001, () => {
     console.log("server is running")

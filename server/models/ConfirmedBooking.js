@@ -25,7 +25,7 @@ const confirmedBookingSchema = new mongoose.Schema({
  
   ShopId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Shop',
+    ref: 'shop',
     required: true
   }
 }, { timestamps: true });
