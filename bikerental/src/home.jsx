@@ -1,10 +1,12 @@
 import React from 'react'
 import Navbar from './user/Navbar'
+import HomeBody from './pages/HomeBody'
 
 function Home() {
   return (
     <div>
-       <Navbar />
+   
+       <HomeBody />
       
     </div>
   )

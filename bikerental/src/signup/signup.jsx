@@ -10,25 +10,44 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   axios
+  //     .post("http://localhost:3001/register", { name, email, password })
+  //     .then((result) => {
+  //       console.log("Submission successful:", result);
+  //       // Clear fields after successful submission
+  //       console.log("Before clearing:", { name, email, password });
+  //       setName("");
+  //       setEmail("");
+  //       setPassword("");
+  //       console.log("After clearing:", { name, email, password });
+  //       navigate('/login') 
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error during submission:", err);
+  //     });
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
 
     axios
       .post("http://localhost:3001/register", { name, email, password })
       .then((result) => {
-        console.log("Submission successful:", result);
-        // Clear fields after successful submission
-        console.log("Before clearing:", { name, email, password });
+        console.log("Registration successful:", result);
         setName("");
         setEmail("");
         setPassword("");
-        console.log("After clearing:", { name, email, password });
-        navigate('/login') 
+        alert("Registration successful! Please check your email for verification.");
+        navigate('/login');
       })
       .catch((err) => {
-        console.error("Error during submission:", err);
+        console.error("Error during registration:", err);
+        alert("Registration failed. Please try again.");
       });
-  };
+};
+
 
   return (
     <div className="addUser">

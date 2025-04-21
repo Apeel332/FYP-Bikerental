@@ -1,7 +1,7 @@
 import './App.css';
 import Login from './login/login';
 import Signup from './signup/signup';
-import Home from './home';
+import Home from './Home';
 import Admin from './admin';
 import AdminDashboard from './admin/admindashboard'
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
@@ -12,7 +12,7 @@ import Manager from './manager';
 import BikeShops from './admin/bikeshops';
 import EditShop from './admin/shopedit';
 import About from './pages/About';
-import Navbar from './home';
+import Navbar from './user/Navbar';
 import Contact from './pages/Contact';
 import { Outlet } from 'react-router-dom';
 import Rent from './pages/Rent';
@@ -28,6 +28,7 @@ import BookingRequest from './manager/BookingRequest';
 import EditBike from './manager/EditBike';
 import ManageShop from './manager/ManageShop';
 import ShopDetails from './manager/ShopDetails';
+import VerifyEmail from './login/VerifyEmail';
 
 
 // Layout with Navbar
@@ -67,13 +68,18 @@ function App() {
       element: <Login />,
     },
     {
+      path: "/verify-email",
+      element: <VerifyEmail />,
+    },
+    
+    {
       path: "/shoplogin",
       element: <Shoplogin />,
     },
-    {
-      path: "/home",
-      element: <Home />,
-    },
+    // {
+    //   path: "/Home",
+    //   element: <Home />,
+    // },
     {
       path: "/admin",
       element: <Admin />,

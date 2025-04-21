@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import StarDisplay from "./StarDisplay";
 
 function ViewShops() {
   const [shop, setShop] = useState(null);
   const [bikes, setBikes] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const { id } = useParams(); // Shop ID
 
   useEffect(() => {
@@ -24,6 +26,16 @@ function ViewShops() {
       })
       .catch((error) => {
         console.error("Error fetching bikes:", error);
+      });
+
+    // Fetch reviews for the shop
+    axios
+      .get(`http://localhost:3001/reviews/shop/${id}`)
+      .then((response) => {
+        setReviews(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching reviews:", error);
       });
   }, [id]);
 
@@ -51,7 +63,7 @@ function ViewShops() {
           </div>
 
           {/* Bikes Cards Section */}
-          <div className="container">
+          <div className="container mb-5">
             <h3>Bikes Available</h3>
             <div className="row">
               {bikes.length > 0 ? (
@@ -68,27 +80,18 @@ function ViewShops() {
                         <p><strong>Price:</strong> Rs. {bike.BikePrice}/day</p>
                         <p><strong>Status:</strong> {bike.status}</p>
                       </div>
-                      {/* <Link
-                        to={`/bookbike/${bike._id}`}
-                        className="btn btn-dark mt-4"
-                        style={{ display: "block", borderRadius: "10px" }}
-                        disabled={bike.status !== "available"} // Disable button if status is not "available"
+                      <Link
+                        to={bike.status === "available" ? `/bookbike/${bike._id}` : "#"}
+                        className={`btn btn-dark mt-4 ${bike.status !== "available" ? "disabled" : ""}`}
+                        style={{
+                          display: "block",
+                          borderRadius: "10px",
+                          pointerEvents: bike.status !== "available" ? "none" : "auto",
+                          opacity: bike.status !== "available" ? 0.5 : 1
+                        }}
                       >
                         Book Bike
-                      </Link> */}
-                      <Link
-  to={bike.status === "available" ? `/bookbike/${bike._id}` : "#"}
-  className={`btn btn-dark mt-4 ${bike.status !== "available" ? "disabled" : ""}`}
-  style={{ 
-    display: "block", 
-    borderRadius: "10px", 
-    pointerEvents: bike.status !== "available" ? "none" : "auto", 
-    opacity: bike.status !== "available" ? 0.5 : 1 
-  }}
->
-  Book Bike
-</Link>
-
+                      </Link>
                     </div>
                   </div>
                 ))
@@ -97,6 +100,31 @@ function ViewShops() {
               )}
             </div>
           </div>
+
+          {/* Reviews Section */}
+          {/* Reviews Section */}
+<div className="container">
+  <h3>Customer Reviews</h3>
+  {reviews.length > 0 ? (
+    <div className="row">
+      {reviews.map((review) => (
+        <div key={review._id} className="col-md-6 mb-3">
+          <div className="card p-3 shadow-sm">
+            <h5 className="text-primary">{review.reviewerName}</h5>
+            <StarDisplay rating={review.rating} /> {/* Display star rating */}
+            <p className="mb-1">{review.reviewText}</p>
+            <small className="text-muted">
+              {new Date(review.createdAt).toLocaleString()}
+            </small>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p>No reviews available for this shop.</p>
+  )}
+</div>
+
         </div>
       ) : (
         <p>Loading shop details...</p>
