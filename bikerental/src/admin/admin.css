@@ -60,7 +60,16 @@ body {
   #sidebar {
     grid-area: sidebar;
     height: 100%;
-    background-color: #263043 !important;
+    background-color:  #020d20 !important;
+
+    overflow-y: auto;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+  }
+  #managersidebar {
+    grid-area: sidebar;
+    height: 100%;
+    background-color: rgb(67, 11, 11) !important;
     overflow-y: auto;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;

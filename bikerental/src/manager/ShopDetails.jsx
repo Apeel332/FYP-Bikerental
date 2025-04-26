@@ -9,7 +9,7 @@ function ShopDetails() {
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:3001/user', { withCredentials: true })
+    axios.get('http://localhost:3001/users', { withCredentials: true })
       .then(res => {
         if (res.data?.email) {
           axios.get(`http://localhost:3001/shopregister`)

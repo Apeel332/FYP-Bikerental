@@ -69,7 +69,7 @@ function App() {
     },
     {
       path: "/verify-email",
-      element: <VerifyEmail />,
+      element: <VerifyEmail  />,
     },
     
     {

@@ -54,7 +54,9 @@ const BikeShops = () => {
 
   return (
     <div className="admin-container">
-      <AdminSidebar />
+       <div className="bg-light p-3" style={{ width: "250px" }}>
+    <AdminSidebar />
+  </div>
       <div className="main-content">
         <h2>Registered Bike Shops</h2>
         <div className="table-container">
@@ -80,13 +82,13 @@ const BikeShops = () => {
                   <td>
                     <button 
                       onClick={() => handleEdit(shop._id)}
-                      className="btn-edit"
+                      className="btn btn-warning"
                     >
                       Edit
                     </button>
                     <button
   onClick={() => handleDelete(shop._id)}
-  className="btn-delete"
+  className="btn btn-danger ms-2"
   disabled={deleteLoading}
 >
   {deleteLoading ? 'Deleting...' : 'Delete'}

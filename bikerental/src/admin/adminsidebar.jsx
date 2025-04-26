@@ -27,8 +27,8 @@ function AdminSidebar({ openSidebarToggle, OpenSidebar }) {
       className={openSidebarToggle ? "sidebar-responsive" : ""}
     >
       <div className="sidebar-title">
-        <div className="sidebar-brand">
-          <BsShield className="icon_header" /> Admin
+        <div className="sidebar-brand" style={{ color: "gold"}}>
+           Admin
         </div>
         <span className="icon close_icon" onClick={OpenSidebar}>
           X
@@ -50,11 +50,7 @@ function AdminSidebar({ openSidebarToggle, OpenSidebar }) {
             <BsHouseAddFill className="icon" /> Add Shops
           </a>
         </li>
-        <li className="sidebar-list-item">
-          <a href="/">
-            <BsExclamationTriangle className="icon" /> Reviews 
-          </a>
-        </li>
+        
         {/* <li className="sidebar-list-item">
           <a href="/">
             <BsFileEarmarkText className="icon" /> Report

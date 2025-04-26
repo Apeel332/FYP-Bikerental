@@ -420,7 +420,7 @@ app.get('/verify-email', async (req, res) => {
 //user data
 app.get('/user', async (req, res) => {
     const token = req.cookies.token;
-    if (!token) {
+    if (!token) { 
         return res.status(401).json({ message: 'Token missing' });
     }
     try {
@@ -433,6 +433,24 @@ app.get('/user', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+
+app.get('/users', async (req, res) => {
+  const token = req.cookies.token;
+  if (!token) { 
+      return res.status(401).json({ message: 'Token missing' });
+  }
+  try {
+      const decoded = jwt.verify(token, "jwt-secret-key");
+      const user = await shopregisterModel.findOne({ email: decoded.email }).select('name email');
+      if (!user) return res.status(404).json({ message: 'User not found' });
+      res.json(user);
+  } catch (err) {
+      console.error('Error fetching user:', err);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 
 

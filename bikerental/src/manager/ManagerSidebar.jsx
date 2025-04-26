@@ -5,9 +5,10 @@ import {
   BsHousesFill,
   BsHouseAddFill,
   BsExclamationTriangle,
-  BsFileEarmarkText,
+  
 } from "react-icons/bs";
-import "../admin/admin.css"
+
+import { TbMotorbike, TbBike } from "react-icons/tb";
 import { IoIosLogOut } from "react-icons/io";
 // import BikeShops from "./bikeshops";
 
@@ -16,19 +17,22 @@ import { IoIosLogOut } from "react-icons/io";
 function ManagerSidebar({ openSidebarToggle, OpenSidebar }) {
    // Function to handle logout
    const handleLogout = () => {
-    // Remove the token from local storage
+    // Remove the token from local storag
     localStorage.removeItem("token");
     // Redirect to the login page or any other desired page
     window.location.href = "/Login";
   };
   return (
     <aside
-      id="sidebar"
-      className={openSidebarToggle ? "sidebar-responsive" : ""}
-    >
+    id="managersidebar"
+    className={`sidebar ${openSidebarToggle ? "sidebar-responsive" : ""}`}
+    style={{ backgroundColor: "red", color: "white", minHeight: "100vh" }}
+  >
+    
+  
       <div className="sidebar-title">
         <div className="sidebar-brand">
-          <BsShield className="icon_header" /> Manager
+          Shop Dashboard
         </div>
         <span className="icon close_icon" onClick={OpenSidebar}>
           X
@@ -52,17 +56,18 @@ function ManagerSidebar({ openSidebarToggle, OpenSidebar }) {
         </li>
         <li className="sidebar-list-item">
           <a href="/managebikes">
-            <BsExclamationTriangle className="icon" /> Manage Bikes 
+            <TbMotorbike className="icon" /> Manage Bikes 
           </a>
         </li>
         <li className="sidebar-list-item">
           <a href="/bookingreq">
-            <BsExclamationTriangle className="icon" /> Bike Booking 
+            <TbBike className="icon" /> Bike Booking 
           </a>
         </li>
         <li className="sidebar-list-item">
-          <a href="/Login" onClick={handleLogout}>
-            <IoIosLogOut className="icon" /> Logout
+          <a href="/Login" onClick={handleLogout} style={{color: "red"
+          }}>
+            <IoIosLogOut className="icon" style={{color: "red"}} /> Logout
           </a>
         </li>
       </ul>

@@ -36,7 +36,9 @@ const Addshops = () => {
 
   return (
     <div className="admin-container">
-      <AdminSidebar />
+        <div className="bg-light p-3" style={{ width: "250px" }}>
+    <AdminSidebar />
+  </div>
       <div className="main-content">
         <div className="shops-header">
           <h2>Registered Bike Shops</h2>
